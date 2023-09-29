@@ -31,7 +31,7 @@ func main() {
 		Gender := librarymanager.Join(librarymanager.Split(arrayValues[0][3], "_"), " ")
 
 		book := librarymanager.Book{Title, Author, PublicationDate, Gender}
-		librarymanager.AddBook(book, library)
+		fmt.Println(librarymanager.AddBook(book, library))
 	}
 
 	if feature == "Delete" || feature == "delete" || feature == "del" {
@@ -46,7 +46,7 @@ func main() {
 		Gender := librarymanager.Join(librarymanager.Split(arrayValues[0][3], "_"), " ")
 
 		book := librarymanager.Book{Title, Author, PublicationDate, Gender}
-		librarymanager.DeleteBook(book, library)
+		fmt.Println(librarymanager.DeleteBook(book, library))
 	}
 
 	if feature == "Read" || feature == "read" {
@@ -54,6 +54,6 @@ func main() {
 		var fileName string
 		fmt.Scanln(&fileName)
 
-		librarymanager.LoadLibrary(fileName)
+		fmt.Println(librarymanager.LoadLibrary(fileName))
 	}
 }
