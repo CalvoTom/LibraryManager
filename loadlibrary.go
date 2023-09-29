@@ -6,11 +6,10 @@ import (
 	"os"
 )
 
-func LoadLibrary() {
-	// var library Library
-	var arrayDictionnaire [][]string
-	var arrayValue [][][]string
-	// var book Book
+func LoadLibrary() Library {
+	var library Library
+	var arrayValues [][]string
+	var arrayBook []Book
 
 	arguments := os.Args[1]
 
@@ -21,36 +20,21 @@ func LoadLibrary() {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		stringBook := (scanner.Text())
-		arrayDictionnaire = append(arrayDictionnaire, Split(stringBook, ","))
+		arrayValues = append(arrayValues, Split(stringBook, ","))
 	}
 	if err := scanner.Err(); err != nil {
 		fmt.Println(err)
 	}
-	for _, ch := range arrayDictionnaire {
-		for _, carac := range ch {
-			arrayValue = append(arrayValue, Split(carac, ":")[1:])
-		}
-	}
-}
 
-func Split(s, sep string) []string {
-	var tabStringSeparate []string
-	lastIndice := 0
-	for indice, val := range s {
-		if val == rune(sep[0]) && s[indice+len(sep)-1] == sep[len(sep)-1] {
-			if lastIndice == indice {
-				lastIndice = indice + len(sep)
-			} else {
-				tabStringSeparate = append(tabStringSeparate, s[lastIndice:indice])
-				lastIndice = indice + len(sep)
-			}
-		}
-		if indice == len(s)-1 {
-			tabStringSeparate = append(tabStringSeparate, s[lastIndice:])
-		}
+	for _, ch := range arrayValues {
+		Title := ch[0]
+		Author := ch[1]
+		PublicationDate := Atoi(ch[2])
+		Gender := ch[3]
+		book := Book{Title, Author, PublicationDate, Gender}
+		arrayBook = append(arrayBook, book)
 	}
-	if tabStringSeparate[len(tabStringSeparate)-1] == "" {
-		return tabStringSeparate[:len(tabStringSeparate)-1]
-	}
-	return tabStringSeparate
+	library = Library{arrayBook}
+
+	return library
 }

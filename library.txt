@@ -1,2 +1,0 @@
-{"Title":"Décaméron","Author":"Boccace","PublicationDate":1349,"Gender":"Romanesque"}
-{"Title":"Contes","Author":"Hans Christian Andersen","PublicationDate":1935,"Gender":"Romanesque"}
