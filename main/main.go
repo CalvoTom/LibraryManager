@@ -2,66 +2,58 @@ package main
 
 import (
 	librarymanager "LibraryManager"
+	"fmt"
 )
 
 func main() {
 	var tab []librarymanager.Book
+	var arrayValues [][]string
+
 	book := librarymanager.Book{"Décaméron", "Boccace", 1349, "Romanesque"}
 	tab = append(tab, book)
 	a := librarymanager.Book{"Contes", "Hans Christian Andersen", 1935, "Romanesque"}
 	tab = append(tab, a)
-	// library := librarymanager.Library{tab}
+	library := librarymanager.Library{tab}
 
-	librarymanager.LoadLibrary()
+	fmt.Println("Wich features do you want tu use : Add, Delete or Read ?")
+	var feature string
+	fmt.Scanln(&feature)
 
+	if feature == "Add" || feature == "add" {
+		fmt.Println("Please enter the book information like so, Contes,Hans_Christian_Andersen,1935,Romanesque :")
+		var values string
+		fmt.Scanln(&values)
+
+		arrayValues = append(arrayValues, librarymanager.Split(values, ","))
+		Title := librarymanager.Join(librarymanager.Split(arrayValues[0][0], "_"), " ")
+		Author := librarymanager.Join(librarymanager.Split(arrayValues[0][1], "_"), " ")
+		PublicationDate := librarymanager.Atoi(arrayValues[0][2])
+		Gender := librarymanager.Join(librarymanager.Split(arrayValues[0][3], "_"), " ")
+
+		book := librarymanager.Book{Title, Author, PublicationDate, Gender}
+		librarymanager.AddBook(book, library)
+	}
+
+	if feature == "Delete" || feature == "delete" || feature == "del" {
+		fmt.Println("Please enter the book information like so, Contes,Hans_Christian_Andersen,1935,Romanesque :")
+		var values string
+		fmt.Scanln(&values)
+
+		arrayValues = append(arrayValues, librarymanager.Split(values, ","))
+		Title := librarymanager.Join(librarymanager.Split(arrayValues[0][0], "_"), " ")
+		Author := librarymanager.Join(librarymanager.Split(arrayValues[0][1], "_"), " ")
+		PublicationDate := librarymanager.Atoi(arrayValues[0][2])
+		Gender := librarymanager.Join(librarymanager.Split(arrayValues[0][3], "_"), " ")
+
+		book := librarymanager.Book{Title, Author, PublicationDate, Gender}
+		librarymanager.DeleteBook(book, library)
+	}
+
+	if feature == "Read" || feature == "read" {
+		fmt.Println("Please enter the library file name you want to read :")
+		var fileName string
+		fmt.Scanln(&fileName)
+
+		librarymanager.LoadLibraryWithArgument(fileName)
+	}
 }
-
-// var tab []librarymanager.Book
-// 	book := librarymanager.Book{"Décaméron", "Boccace", 1349, "Romanesque"}
-// 	tab = append(tab, book)
-// 	a := librarymanager.Book{"Contes", "Hans Christian Andersen", 1935, "Romanesque"}
-// 	tab = append(tab, a)
-// 	library := librarymanager.Library{tab}
-
-// 	fmt.Println("Wich features do you want tu use : Add, Delete or Read ?")
-// 	var feature string
-// 	fmt.Scanln(&feature)
-// 	if feature == "Add" || feature == "add" {
-// 		fmt.Println("Please enter the book information")
-// 		fmt.Println("Title :")
-// 		var titleRune []rune
-// 		fmt.Scanln(&titleRune)
-
-// 		fmt.Println("Author :")
-// 		var authorRune []rune
-// 		fmt.Scanln(&authorRune)
-
-// 		fmt.Println("Publication date (years only) :")
-// 		var PublicationDate int
-// 		fmt.Scanln(&PublicationDate)
-
-// 		fmt.Println("Gender :")
-// 		var genderRune []rune
-// 		fmt.Scanln(&genderRune)
-
-// 		for i := 0; i < len(titleRune); i++ {
-// 			if titleRune[i] == '_' {
-// 				titleRune[i] = ' '
-// 			}
-// 		}
-// 		Title := string(titleRune)
-// 		for i := 0; i < len(authorRune); i++ {
-// 			if authorRune[i] == '_' {
-// 				authorRune[i] = ' '
-// 			}
-// 		}
-// 		Author := string(authorRune)
-// 		for i := 0; i < len(genderRune); i++ {
-// 			if genderRune[i] == '_' {
-// 				genderRune[i] = ' '
-// 			}
-// 		}
-// 		Gender := string(genderRune)
-
-// 		book := librarymanager.Book{Title, Author, PublicationDate, Gender}
-// 		fmt.Println(librarymanager.AddBook(book, library))
