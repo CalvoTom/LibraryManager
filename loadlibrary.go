@@ -6,14 +6,12 @@ import (
 	"os"
 )
 
-func LoadLibrary() Library {
+func LoadLibrary(fileName string) Library {
 	var library Library
 	var arrayValues [][]string
 	var arrayBook []Book
 
-	arguments := os.Args[1]
-
-	file, err := os.Open(arguments)
+	file, err := os.Open(fileName)
 	if err != nil {
 		fmt.Println(err)
 	}

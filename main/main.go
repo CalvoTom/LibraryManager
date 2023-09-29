@@ -14,6 +14,7 @@ func main() {
 	a := librarymanager.Book{"Contes", "Hans Christian Andersen", 1935, "Romanesque"}
 	tab = append(tab, a)
 	library := librarymanager.Library{tab}
+	fmt.Println(librarymanager.LoadLibrary("library.txt"))
 
 	fmt.Println("Wich features do you want tu use : Add, Delete or Read ?")
 	var feature string
@@ -54,6 +55,6 @@ func main() {
 		var fileName string
 		fmt.Scanln(&fileName)
 
-		librarymanager.LoadLibraryWithArgument(fileName)
+		librarymanager.LoadLibrary(fileName)
 	}
 }
